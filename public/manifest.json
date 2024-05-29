@@ -1,0 +1,4 @@
+{
+   "name": "Bundo Test Api",
+   "permissions": ["https://qtg9k1vhp3.execute-api.us-west-2.amazonaws.com/Stage/"]
+}

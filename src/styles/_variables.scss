@@ -1,0 +1,30 @@
+$PoppinsFont: 'Poppins';
+$Tv2SansDisplayFont: 'Tv2SansDisplay';
+
+$fade1: fadeIn 0.15s ease-in-out;
+$fade1Resp: fadeInResponsive 0.15s ease-in-out;
+
+///--- ANIMATIONS ---///
+@keyframes fadeInResponsive {
+   from {
+      opacity: 0;
+      top: 0px;
+   }
+
+   to {
+      opacity: 1;
+      top: 30px;
+   }
+}
+
+@keyframes fadeIn {
+   from {
+      opacity: 0;
+      top: -40px;
+   }
+
+   to {
+      opacity: 1;
+      top: -20px;
+   }
+}

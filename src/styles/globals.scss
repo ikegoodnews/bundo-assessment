@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './fonts.scss';
+@import './variables';
+
+:root {
+   --foreground-rgb: 0, 0, 0;
+   --background-start-rgb: 214, 219, 220;
+   --background-end-rgb: 255, 255, 255;
+}
+
+/* @media (prefers-color-scheme: dark) {
+   :root {
+      --foreground-rgb: 255, 255, 255;
+      --background-start-rgb: 0, 0, 0;
+      --background-end-rgb: 0, 0, 0;
+   }
+} */
+
+body {
+   color: rgb(var(--foreground-rgb));
+   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+   .text-balance {
+      text-wrap: balance;
+   }
+}
+
+html,
+body {
+   margin: 0;
+   padding: 0;
+   width: 100%;
+   height: 100%;
+   font-family: $Tv2SansDisplayFont;
+   scroll-behavior: smooth;
+}
+
+body {
+   font-size: 16px;
+   color: #e6edf3;
+   background-color: rgba(255, 255, 255, 1);
+   box-sizing: border-box;
+   text-rendering: geometricPrecision;
+   -moz-osx-font-smoothing: grayscale;
+   -webkit-font-smoothing: antialiased;
+   scroll-behavior: smooth;
+   overflow-x: hidden;
+
+   & > * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+   }
+
+   -ms-overflow-style: none;
+   scrollbar-width: 4px;
+   &::-webkit-scrollbar {
+      width: 6px;
+   }
+   &::-webkit-scrollbar-track {
+      background: transparent;
+   }
+   &::-webkit-scrollbar-thumb {
+      background-color: #ffffff98;
+      border-radius: 10px;
+   }
+}
+
+#__next {
+   display: flex;
+   flex-direction: column;
+   position: relative;
+   height: 100%;
+   width: 100%;
+   padding-bottom: 6rem;
+}
+
+a {
+   color: inherit;
+   text-decoration: none;
+}
+
+img {
+   object-fit: cover;
+   object-position: center center;
+   height: 100%;
+   width: 100%;
+}
+
+p,
+li,
+span,
+small,
+article,
+caption,
+sub,
+sup,
+div,
+abbr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   margin: 0;
+   padding: 0;
+}
+
+ul,
+ol,
+dl {
+   margin: 0;
+   padding: 0;
+   list-style: none;
+}
+
+input,
+textarea {
+   background: transparent;
+   &:focus,
+   &:active {
+      &::placeholder {
+         opacity: 0.5;
+      }
+   }
+}
+
+input:disabled,
+textarea:disabled {
+   background: #f5f6f6;
+   color: #304447;
+}
+
+textarea {
+   resize: none;
+}
+
+button {
+   border: none;
+   background: transparent;
+   padding: 0;
+}
+
+button,
+input,
+textarea {
+   font-family: $PoppinsFont;
+   outline: none !important;
+}

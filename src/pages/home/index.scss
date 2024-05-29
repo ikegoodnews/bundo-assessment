@@ -1,0 +1,19 @@
+.home_page {
+   .search_panel {
+      max-width: 90vw;
+      animation: $fade1;
+      top: -20px;
+      background-color: #ffffff;
+      z-index: 1;
+      @media (max-width: 727px) {
+         top: 30px;
+         animation: $fade1Resp;
+      }
+      form {
+         z-index: 5000;
+      }
+   }
+   .googlemap {
+      height: 40rem;
+   }
+}

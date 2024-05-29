@@ -1,0 +1,66 @@
+nav {
+   height: 66px;
+   background-color: rgba(241, 233, 219, 1);
+
+   .logo {
+      width: 112px;
+   }
+   .notification {
+      width: 35px;
+      height: 35px;
+      position: relative;
+      &::before {
+         content: attr(data-count);
+         position: absolute;
+         top: 2px;
+         right: -7px;
+         height: 15px;
+         width: fit-content;
+         padding: 0.3rem;
+         font-size: 10.25px;
+         font-weight: 400;
+         border-radius: 20px;
+         background-color: rgba(255, 77, 79, 1);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+      }
+      svg {
+         width: 100%;
+         height: 100%;
+      }
+   }
+
+   ul {
+      li {
+         width: 50px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         a {
+            text-transform: capitalize;
+            font-size: 12px;
+            font-weight: 400;
+            color: #808080;
+            line-height: 16.32px;
+            transition: 0.2s ease-in;
+         }
+         &:hover,
+         &.active {
+            a {
+               font-weight: 700;
+               color: #34a853;
+            }
+         }
+      }
+   }
+
+   .user-pill {
+      .username {
+         color: #11270b;
+      }
+      .avatar {
+         border-radius: 50%;
+      }
+   }
+}
