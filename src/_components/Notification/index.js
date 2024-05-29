@@ -7,7 +7,7 @@ const requestPermission = async () => {
          if (permission === 'granted') {
             console.log('Notification permission granted.');
             const token = await getToken(messaging, {
-               vapidKey: 'BJSsmVbEJPcEuCt8MThuY0PJzgAidnaQkZSJJ67BE_m4wp53LaH1VW7emQGcKQoDvScP6vfMzDUM8OE-iexuVgY',
+               vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
             });
             // console.log('FCM Token:', token);
             showNotification('Subscribed to notifications!');
