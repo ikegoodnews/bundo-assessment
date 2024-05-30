@@ -11,37 +11,16 @@ import ClockIcon from '../../../public/_assets/icons/clock-icon.svg';
 import Vendors from '../../../public/_assets/icons/vendors.svg';
 import Close from '../../../public/_assets/icons/close-x.svg';
 
-const Vendor = () => {
-   return (
-      <>
-         <div className="flex items-center absolute top-16 left-1/3 bg-[#fff] p-4 rounded-2xl shadow-xl">
-            <div>
-               <Vendors />
-            </div>
-            <div className="mx-5">
-               <p className="text-[#302F2C] text-lg">We found {places?.length} Vendors for you</p>
-               <p className="mt-3 text-[#302F2C]">Tap on any of them to connect with them</p>
-            </div>
-            <div className="cursor-pointer" onClick={handleClick}>
-               <Close />
-            </div>
-         </div>
-      </>
-   );
-};
-
 const HomePage = () => {
-   const cityRef = useRef(null);
    const searchPanelRef = useRef();
    // const [coords, setCoords] = useState({lat: 6.452448, lng: 3.395269});
    const [coords, setCoords] = useState({});
    const [locations, setLocations] = useState([]);
-   const [showVendor, setShowVendor] = useState(false);
+   const [showVendor, setShowVendor] = useState(true);
    const [autocomplete, setAutocomplete] = useState(null);
    const [selectedPlace, setSelectedPlace] = useState(null);
-   console.log(`selectedPlace=====>`, selectedPlace);
-
    const [showSearchPanel, setShowSearchPanel] = useState(false);
+   console.log(`selectedPlace=====>`, selectedPlace);
 
    useOnClickOutside(searchPanelRef, () => {
       if (showSearchPanel) setShowSearchPanel(false);
@@ -84,28 +63,28 @@ const HomePage = () => {
       const lat = autocomplete.getPlace().geometry.location.lat();
       const lng = autocomplete.getPlace().geometry.location.lng();
       console.log(`autocomplete.getPlace()=====>`, autocomplete.getPlace());
-      // handleAddLocation({id: Date.now(), lat, long: lng});
       setSelectedPlace(autocomplete.getPlace());
       setCoords({lat, lng});
    };
 
-   // const handleSubmit = async (e) => {
-   //    e.preventDefault();
-
-   //    const newLocation = {id: Date.now(), lat: parseFloat(lat), long: parseFloat(lng)};
-   //    // Post new location to your API or database
-   //    await fetch('/api/add-location', {
-   //       method: 'POST',
-   //       headers: {'Content-Type': 'application/json'},
-   //       body: JSON.stringify(newLocation),
-   //    });
-
-   //    // Call the callback function to refresh the map
-   //    onAddLocation(newLocation);
-
-   //    setLat('');
-   //    setLng('');
-   // };
+   const Vendor = () => {
+      return (
+         <>
+            <div className="flex items-center absolute top-16 left-1/3 bg-color-2 p-4 rounded shadow-xl">
+               <Vendors />
+               <div className="mx-5">
+                  <p className="text-color-7 text-xs font-normal leading-6">
+                     We found {locations?.length} Vendors for you
+                  </p>
+                  <p className="text-color-7 font-light text-xs leading-5">Tap on any of them to connect with them</p>
+               </div>
+               <div className="cursor-pointer" onClick={() => setShowVendor(false)}>
+                  <Close />
+               </div>
+            </div>
+         </>
+      );
+   };
 
    return (
       <Layout>
@@ -119,78 +98,44 @@ const HomePage = () => {
                   </button>
                   {isLoaded && (
                      <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
-                        <form className="relative pt-16 md:pt-2 ">
-                           {/* w-96 */}
+                        <form className="relative w-96 pt-16 md:pt-2 ">
+                           {/*  */}
                            {showSearchPanel && (
                               <p className="absolute top-10 md:-top-3 font-light px-6 text-xs leading-4 text-color-4 duration-500 z-50">
                                  Type in your location
                               </p>
                            )}
-                           <div className="relative border border-color-6 bg-color-5 rounded-5 pt-3 pb-4 px-10 md:pr-16 font-medium text-sm leading-5 text-color-7">
+                           <div
+                              onClick={() => setShowSearchPanel(true)}
+                              className="relative z-50 border border-color-6 bg-color-5 rounded-5 pt-3 pb-4 px-10 md:pr-16 font-medium text-sm leading-5 text-color-7">
                               <button
                                  type="submit"
                                  // onClick={handleSearchOnKeyDown}
                                  className="left-1 top-6 absolute">
                                  <SearchIcon />
                               </button>
-                              <input type="text" name="text" className="" placeholder="Type in your location" />
+                              <input type="text" name="text" className="w-4/5" placeholder="Type in your location" />
                               <button
+                                 name="name"
                                  type="submit"
                                  // onClick={handleSearchOnKeyDown}
                                  className="absolute hidden md:inline-block scale-90 right-1 top-0.5">
                                  <MapSearchIcon />
                               </button>
                            </div>
+                           {/* {showSearchPanel && (
+                              <div
+                                 ref={searchPanelRef}
+                                 className="search_panel absolute bg-white w-full shadow-xl px-6 pt-28 pb-6 z-50 bg-white">
+                                 <LocationLists locations={locations} />
+                              </div>
+                           )} */}
                         </form>
                      </Autocomplete>
                   )}
-                  {/* <Formsy className="relative w-96 pt-16 md:pt-2">
-                     {showSearchPanel && (
-                        <p className="absolute top-10 md:-top-3 font-light px-6 text-xs leading-4 text-color-4 duration-500 z-50">
-                           Type in your location
-                        </p>
-                     )}
-                     <div onClick={() => setShowSearchPanel(true)} className="px-6 z-10 relative">
-                        <TextInput
-                           ref={cityRef}
-                           type="text"
-                           name="search"
-                           className="border border-color-6 bg-color-5 rounded-5 pt-3 pb-4 px-10 md:pr-16 font-medium text-sm leading-5 text-color-7"
-                           placeholder="Type in your location"
-                           // onValueChange={handleSearch}
-                           // onKeyPress={(e) => {
-                           //    e.key === 'Enter' && handleSearchOnKeyDown();
-                           // }}
-                           leftIcon={
-                              <button
-                                 type="submit"
-                                 // onClick={handleSearchOnKeyDown}
-                                 className="icon_wrapper -left-8 top-0 absolute">
-                                 <SearchIcon />
-                              </button>
-                           }
-                           rightIcon={
-                              <button
-                                 type="submit"
-                                 // onClick={handleSearchOnKeyDown}
-                                 className="icon_wrapper hidden md:inline-block scale-90 -right-14 -top-2.5 absolute">
-                                 <MapSearchIcon />
-                              </button>
-                           }
-                        />
-                     </div>
-                     {showSearchPanel && (
-                        <div
-                           ref={searchPanelRef}
-                           className="search_panel absolute bg-white w-full shadow-xl px-6 pt-28 pb-6 z-50 bg-white">
-                           <LocationLists locations={locations} />
-                        </div>
-                     )}
-                  </Formsy> */}
                </div>
 
                <div className="googlemap w-full relative">
-                  {/* <AddLocation onAddLocation={handleAddLocation} /> */}
                   <Map
                      key={locations?.length}
                      coords={coords}
@@ -198,7 +143,7 @@ const HomePage = () => {
                      locations={locations}
                      setLocations={setLocations}
                   />
-                  {showVendor && <Vendor />}
+                  {showVendor && isLoaded && <Vendor />}
                </div>
             </div>
          </div>
@@ -219,17 +164,44 @@ const LocationLists = ({locations}) => {
          <p className="font-medium py-3 pt-5 text-sm leading-5 text-color-7">Your past locations</p>
          <ul className="">
             {locations?.length > 0 ? (
-               locations?.map((location, i) => (
-                  <li key={i} className="flex items-start py-3 border-b border-color-9 cursor-pointer">
-                     <div className="icon mr-2 scale-90">
-                        <ClockIcon />
-                     </div>
-                     <div className="">
-                        <h4 className="text-sm pb-2 font-normal leading-5 text-color-8 tracking-1">{location?.lat}</h4>
-                        <p className="font-light text-xs leading-3 text-color-8">{location?.long}</p>
-                     </div>
-                  </li>
-               ))
+               locations?.map((location, i) => {
+                  const handleSubmit = async () => {
+                     const newLocation = {
+                        id: Date.now(),
+                        lat: parseFloat(location?.lat),
+                        long: parseFloat(location?.long),
+                     };
+                     // Post new location to your API or database
+                     await fetch('/api/add-location', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(newLocation),
+                     });
+
+                     // Call the callback function to refresh the map
+                     handleAddLocation(newLocation);
+
+                     setLat('');
+                     setLng('');
+                  };
+
+                  return (
+                     <li
+                        key={i}
+                        onClick={handleSubmit}
+                        className="flex items-start py-3 border-b border-color-9 cursor-pointer">
+                        <div className="icon mr-2 scale-90">
+                           <ClockIcon />
+                        </div>
+                        <div className="">
+                           <h4 className="text-sm pb-2 font-normal leading-5 text-color-8 tracking-1">
+                              {location?.lat}
+                           </h4>
+                           <p className="font-light text-xs leading-3 text-color-8">{location?.long}</p>
+                        </div>
+                     </li>
+                  );
+               })
             ) : (
                <li className="text-sm pb-2 py-3 font-normal leading-5 text-color-8 tracking-1">
                   no locations available
