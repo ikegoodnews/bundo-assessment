@@ -6,9 +6,7 @@ const containerStyle = {
    height: '70vh',
 };
 
-const Map = ({coords, locations}) => {
-   const [selectedPlace, setSelectedPlace] = useState(null);
-
+const Map = ({coords, locations, selectedPlace, setSelectedPlace}) => {
    const CustomMarker = {
       url: '/_assets/images/marker.png',
       scaledSize: {width: 50, height: 50},
@@ -44,7 +42,7 @@ const Map = ({coords, locations}) => {
                />
             ))} */}
 
-            {/* {selectedPlace && (
+            {selectedPlace && (
                <InfoWindowF
                   position={{lat: selectedPlace.latitude, lng: selectedPlace.longitude}}
                   anchor={
@@ -65,7 +63,7 @@ const Map = ({coords, locations}) => {
                      </p>
                   </div>
                </InfoWindowF>
-            )} */}
+            )}
          </GoogleMap>
       </LoadScript>
    );

@@ -8,6 +8,27 @@ import Formsy from 'formsy-react';
 import MapSearchIcon from '../../../public/_assets/icons/search-location-icon.svg';
 import SearchIcon from '../../../public/_assets/icons/search-icon.svg';
 import ClockIcon from '../../../public/_assets/icons/clock-icon.svg';
+import Vendors from '../../../public/_assets/icons/vendors.svg';
+import Close from '../../../public/_assets/icons/close-x.svg';
+
+const Vendor = () => {
+   return (
+      <>
+         <div className="flex items-center absolute top-16 left-1/3 bg-[#fff] p-4 rounded-2xl shadow-xl">
+            <div>
+               <Vendors />
+            </div>
+            <div className="mx-5">
+               <p className="text-[#302F2C] text-lg">We found {places?.length} Vendors for you</p>
+               <p className="mt-3 text-[#302F2C]">Tap on any of them to connect with them</p>
+            </div>
+            <div className="cursor-pointer" onClick={handleClick}>
+               <Close />
+            </div>
+         </div>
+      </>
+   );
+};
 
 const HomePage = () => {
    const cityRef = useRef(null);
@@ -15,6 +36,7 @@ const HomePage = () => {
    // const [coords, setCoords] = useState({lat: 6.452448, lng: 3.395269});
    const [coords, setCoords] = useState({});
    const [locations, setLocations] = useState([]);
+   const [showVendor, setShowVendor] = useState(false);
    const [autocomplete, setAutocomplete] = useState(null);
    const [selectedPlace, setSelectedPlace] = useState(null);
    console.log(`selectedPlace=====>`, selectedPlace);
@@ -62,9 +84,8 @@ const HomePage = () => {
       const lat = autocomplete.getPlace().geometry.location.lat();
       const lng = autocomplete.getPlace().geometry.location.lng();
       console.log(`autocomplete.getPlace()=====>`, autocomplete.getPlace());
-      // setLocations([...locations, { id: Date.now(), lat, long: lng }]);
       // handleAddLocation({id: Date.now(), lat, long: lng});
-      // setSelectedPlace(autocomplete.getPlace());
+      setSelectedPlace(autocomplete.getPlace());
       setCoords({lat, lng});
    };
 
@@ -168,9 +189,16 @@ const HomePage = () => {
                   </Formsy> */}
                </div>
 
-               <div className="googlemap w-full">
+               <div className="googlemap w-full relative">
                   {/* <AddLocation onAddLocation={handleAddLocation} /> */}
-                  <Map key={locations?.length} coords={coords} locations={locations} setLocations={setLocations} />
+                  <Map
+                     key={locations?.length}
+                     coords={coords}
+                     selectedPlace={selectedPlace}
+                     locations={locations}
+                     setLocations={setLocations}
+                  />
+                  {showVendor && <Vendor />}
                </div>
             </div>
          </div>
