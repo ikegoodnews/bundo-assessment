@@ -99,37 +99,38 @@ const HomePage = () => {
                   {isLoaded && (
                      <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
                         <form className="relative w-96 pt-16 md:pt-2 ">
-                           {/*  */}
-                           {showSearchPanel && (
-                              <p className="absolute top-10 md:-top-3 font-light px-6 text-xs leading-4 text-color-4 duration-500 z-50">
-                                 Type in your location
-                              </p>
-                           )}
-                           <div
-                              onClick={() => setShowSearchPanel(true)}
-                              className="relative z-50 border border-color-6 bg-color-5 rounded-5 pt-3 pb-4 px-10 md:pr-16 font-medium text-sm leading-5 text-color-7">
-                              <button
-                                 type="submit"
-                                 // onClick={handleSearchOnKeyDown}
-                                 className="left-1 top-6 absolute">
-                                 <SearchIcon />
-                              </button>
-                              <input type="text" name="text" className="w-4/5" placeholder="Type in your location" />
-                              <button
-                                 name="name"
-                                 type="submit"
-                                 // onClick={handleSearchOnKeyDown}
-                                 className="absolute hidden md:inline-block scale-90 right-1 top-0.5">
-                                 <MapSearchIcon />
-                              </button>
-                           </div>
-                           {/* {showSearchPanel && (
+                           <div className="px-6">
+                              {showSearchPanel && (
+                                 <p className="absolute top-10 md:-top-3 font-light text-xs leading-4 text-color-4 duration-500 z-50">
+                                    Type in your location
+                                 </p>
+                              )}
                               <div
-                                 ref={searchPanelRef}
-                                 className="search_panel absolute bg-white w-full shadow-xl px-6 pt-28 pb-6 z-50 bg-white">
-                                 <LocationLists locations={locations} />
+                                 onClick={() => setShowSearchPanel(true)}
+                                 className="relative z-50 border border-color-6 bg-color-5 rounded-5 pt-3 pb-4 px-10 md:pr-16 font-medium text-sm leading-5 text-color-7">
+                                 <button
+                                    type="submit"
+                                    // onClick={handleSearchOnKeyDown}
+                                    className="left-2 top-3 absolute">
+                                    <SearchIcon />
+                                 </button>
+                                 <input type="text" name="text" className="w-4/5" placeholder="Type in your location" />
+                                 <button
+                                    name="name"
+                                    type="submit"
+                                    // onClick={handleSearchOnKeyDown}
+                                    className="absolute hidden md:inline-block scale-90 right-1 top-0.5">
+                                    <MapSearchIcon />
+                                 </button>
                               </div>
-                           )} */}
+                              {showSearchPanel && (
+                                 <div
+                                    ref={searchPanelRef}
+                                    className="search_panel absolute bg-white w-full shadow-xl px-6 pt-28 pb-6 z-50 bg-white">
+                                    <LocationLists locations={locations} />
+                                 </div>
+                              )}
+                           </div>
                         </form>
                      </Autocomplete>
                   )}
