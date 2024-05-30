@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {RequestType, geocode} from 'react-geocode';
 
 const AddLocation = ({onAddLocation}) => {
    const [lat, setLat] = useState('');
@@ -7,9 +6,6 @@ const AddLocation = ({onAddLocation}) => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-
-      const address = await geocode(RequestType.LATLNG, `${parseFloat(lat)},${parseFloat(lng)}`);
-      console.log(`address=====>`, address);
 
       const newLocation = {id: Date.now(), lat: parseFloat(lat), long: parseFloat(lng)};
       // Post new location to your API or database

@@ -29,6 +29,7 @@ export const TextInput = (props) => {
             {props.prefix}
             {props.leftIcon}
             <input
+               ref={props.ref}
                id={props.id}
                type={props.type}
                name={props.name}

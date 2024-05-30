@@ -7,7 +7,6 @@ export default async function handler(req, res) {
          throw new Error('Failed to fetch locations');
       }
       const data = await response.json();
-      console.log('Fetched data:', data);
       res.status(200).json(data?.data);
    } catch (error) {
       console.error('Error fetching locations', error);
